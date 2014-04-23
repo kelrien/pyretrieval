@@ -10,6 +10,9 @@ class Document(object):
     def __setitem__(self,index,value):
         self.metadata[index] = value
         
+    def __iter__(self):
+        return self.metadata.itervalues()    
+    
     def json(self):
         #transform object including metadata into json
         pass
