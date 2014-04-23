@@ -15,5 +15,11 @@ class Processor(object):
         #load lemmas from file
         pass
 
+    def tokenize(document):
+        pass
+        
+    def stem(word):
+        pass
+    
     def string_to_document(string):
         pass
