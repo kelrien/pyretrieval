@@ -15,11 +15,14 @@ class Processor(object):
         #load lemmas from file
         pass
 
+    #tokenize -> stem
     def tokenize(document):
         pass
-        
+    
+    #stem -> index    
     def stem(word):
         pass
     
-    def string_to_document(string):
+    #index -> done
+    def index(string):
         pass
