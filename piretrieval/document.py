@@ -16,7 +16,7 @@ class Document(object):
         self.vector[key] = value
         
     def __iter__(self):
-        return self.metadata.itervalues()    
+        return self.vector.itervalues()    
     
     def json(self):
         #transform object including metadata into json
