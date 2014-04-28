@@ -20,7 +20,7 @@ class Processor(object):
     def load_stopwords(self,file_path):
         file = open(file_path)
         for line in file:
-            if not line.startswith('):
+            if not line.startswith('#'):
                 stopwords.append(line.strip('\n').lower())
     
     def load_lemmas(self,file_path):
