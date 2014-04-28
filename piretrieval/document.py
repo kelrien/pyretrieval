@@ -1,14 +1,19 @@
+import json
+
 class Document(object):
 
     def __init__(self):
         self.vector = dict()
         self.metadata = dict()
 
-    def __getitem__(self,index):
-        return self.metadata[index]
+    def __getitem__(self,key):
+        if self.vector.has_key(key):
+            return self.vector[key]
+        else:
+            return 0
         
-    def __setitem__(self,index,value):
-        self.metadata[index] = value
+    def __setitem__(self,key,value):
+        self.vector[key] = value
         
     def __iter__(self):
         return self.metadata.itervalues()    
@@ -16,5 +21,3 @@ class Document(object):
     def json(self):
         #transform object including metadata into json
         pass
-       
-    
