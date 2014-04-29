@@ -31,7 +31,7 @@ class Processor(object):
         file = open(file_path)
         for line in file:
             line = line.decode('utf-8')
-            if not line.startswith(u'#'):
+            if not '#' in line:
                 keys = line.strip('\n').lower().split('\t')
                 self.lemmas[keys[0]] = keys[1]
                 
