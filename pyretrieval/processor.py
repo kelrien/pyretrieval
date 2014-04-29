@@ -30,7 +30,8 @@ class Processor(object):
         # lines starting with # will be ignored
         file = open(file_path)
         for line in file:
-            if not line.startswith('#'):
+            line = line.decode('utf-8')
+            if not line.startswith(u'#'):
                 keys = line.strip('\n').lower().split('\t')
                 self.lemmas[keys[0]] = keys[1]
                 
