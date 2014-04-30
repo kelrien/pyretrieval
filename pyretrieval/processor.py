@@ -45,7 +45,7 @@ class Processor(object):
         for char in self.replace_characters.keys():
             temp = temp.replace(char, self.replace_characters[char])          
         #remove unwanted characters
-        temp = re.sub(r'[^.{0}]'.format(self.filter_characters), '', string)
+        temp = re.sub(r'[^.{0}]'.format(self.filter_characters), '', temp)
         result = temp.split()
         return result
     
