@@ -3,7 +3,7 @@ import re
 
 class Processor(object):
 
-    def __init__(self, filter_characters = 'a-zA-Z0-9', replace_characters = dict(),  stopwords = [], lemmas = dict()):
+    def __init__(self, filter_characters = 'a-zA-Z0-9 ', replace_characters = dict(),  stopwords = [], lemmas = dict()):
         self.stopwords = stopwords
         #replace characters is a dict of chars where the key marks the character to be replaced with the connected value
         self.replace_characters = replace_characters
@@ -40,10 +40,10 @@ class Processor(object):
     #tokenize -> stem
     def tokenize(self, string):
         result = []
-        temp = string
+        temp = string.lower()
         #replace characters
-        for char in replace_characters.keys():
-            temp = temp.replace(char, replace_characters[char])          
+        for char in self.replace_characters.keys():
+            temp = temp.replace(char, self.replace_characters[char])          
         #remove unwanted characters
         temp = re.sub(r'[^.{0}]'.format(self.filter_characters), '', string)
         result = temp.split()
@@ -54,10 +54,13 @@ class Processor(object):
         pass
     
     #index -> done
-    def index(tokens):
+    def index(self, string):
         result = document.Document()
+        result.metadata["original"] = string
+        tokens = self.tokenize(string)
         for token in tokens:
             if token in result.vector:
                 result.vector[token] += 1
             else:
-                result.vector[token] = 0
+                result.vector[token] = 1
+        return result
