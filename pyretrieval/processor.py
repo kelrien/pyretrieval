@@ -3,8 +3,10 @@ import re
 
 class Processor(object):
 
-    def __init__(self, filter_characters = 'a-zA-Z0-9', stopwords = [], lemmas = dict()):
+    def __init__(self, filter_characters = 'a-zA-Z0-9', replace_characters = dict(),  stopwords = [], lemmas = dict()):
         self.stopwords = stopwords
+        #replace characters is a dict of chars where the key marks the character to be replaced with the connected value
+        self.replace_characters = replace_characters
         #filter_characters is a regex that triggers on allowed characters
         self.filter_characters = filter_characters
         self.lemmas = lemmas
@@ -36,10 +38,15 @@ class Processor(object):
                 self.lemmas[keys[0]] = keys[1]
                 
     #tokenize -> stem
-    def tokenize(string):
+    def tokenize(self, string):
         result = []
-        #replace every character that is not allowed
-        result = re.sub(r'[^.{0}]'.format(filter_characters), ' ', string).split()
+        temp = string
+        #replace characters
+        for char in replace_characters.keys():
+            temp = temp.replace(char, replace_characters[char])          
+        #remove unwanted characters
+        temp = re.sub(r'[^.{0}]'.format(self.filter_characters), '', string)
+        result = temp.split()
         return result
     
     #stem -> index    
