@@ -54,7 +54,7 @@ class Processor(object):
         return word
     
     #index -> done
-    def index(self, string, lemmatize = True):
+    def process(self, string, lemmatize = True):
         result = document.Document()
         result.metadata["original"] = string
         tokens = self.tokenize(string)
