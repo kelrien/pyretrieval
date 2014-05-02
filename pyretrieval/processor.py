@@ -16,14 +16,15 @@ class Processor(object):
         if word in self.lemmas:
             return self.lemmas[word]
         else:
-            return None
+            return word
                         
     #stopwords will be ignored when tokenized
     def load_stopwords(self,file_path):
         file = open(file_path)
         for line in file:
+            line = line.decode('utf-8')
             if not line.startswith('#'):
-                stopwords.append(line.strip('\n').lower())
+                self.stopwords.append(line.strip('\n').strip('\r').lower())
     
     def load_lemmas(self,file_path):
         # load lemmas from file
@@ -34,7 +35,7 @@ class Processor(object):
         for line in file:
             line = line.decode('utf-8')
             if not '#' in line:
-                keys = line.strip('\n').lower().split('\t')
+                keys = line.strip('\n').strip('\r').lower().split('\t')
                 self.lemmas[keys[0]] = keys[1]
                 
     #tokenize -> stem
@@ -51,14 +52,18 @@ class Processor(object):
     
     #stem -> index    
     def stem(word):
-        pass
+        return word
     
     #index -> done
-    def index(self, string):
+    def index(self, string, lemmatize = True):
         result = document.Document()
         result.metadata["original"] = string
         tokens = self.tokenize(string)
         for token in tokens:
+            if lemmatize:
+                token = self.lemmatize(token)
+            else:
+                token = stem(token)
             if token in result.vector:
                 result.vector[token] += 1
             else:

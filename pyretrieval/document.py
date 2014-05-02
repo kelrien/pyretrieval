@@ -4,7 +4,6 @@ class Document(object):
 
     def __init__(self):
         self.vector = dict()
-        self.text  = ''
         self.metadata = dict()
 
     def __getitem__(self,key):
