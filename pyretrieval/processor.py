@@ -40,7 +40,6 @@ class Processor(object):
                 
     #tokenize -> stem
     def tokenize(self, string):
-        result = []
         temp = string.lower()
         #replace characters
         for char in self.replace_characters.keys():
