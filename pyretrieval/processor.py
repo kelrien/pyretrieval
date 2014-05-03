@@ -63,8 +63,9 @@ class Processor(object):
                 token = self.lemmatize(token)
             else:
                 token = stem(token)
-            if token in result.vector:
-                result.vector[token] += 1
-            else:
-                result.vector[token] = 1
+            if token not in self.stopwords:    
+                if token in result.vector:
+                    result.vector[token] += 1
+                else:
+                    result.vector[token] = 1
         return result
