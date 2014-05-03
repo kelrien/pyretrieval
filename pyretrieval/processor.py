@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-
 import document
 import re
 
 class Processor(object):
 
-    def __init__(self, filter_characters = 'a-zA-Z0-9 ', replace_characters = dict(),  stopwords = [], lemmas = dict()):
+    def __init__(self, filter_characters = 'a-zA-Z0-9 ', replace_characters = {'ä':'ae', 'ö':'oe', 'ü':'ue', 'ß':'ss', '\t':' '},  stopwords = [], lemmas = dict()):
         self.stopwords = stopwords
         #replace characters is a dict of chars where the key marks the character to be replaced with the connected value
         self.replace_characters = replace_characters
