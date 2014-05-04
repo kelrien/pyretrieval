@@ -18,7 +18,7 @@ for line in file:
     i += 1
     sys.stdout.write(str(i))
     sys.stdout.write('\r')
-    docs.append(proc.process(line))
+    docs.append(proc.process(line.decode("utf-8")))
 print "Indexing Documents..."
 #TODO INDEX DOCUMENTS
 idxr = indexer.Indexer()
