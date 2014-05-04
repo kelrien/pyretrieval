@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import datetime, sys
 
-from pyretrieval import processor, document
+from pyretrieval import processor, document, indexer
 
+start = datetime.datetime.now()
 print "Initializing Document Processor"
 proc = processor.Processor()
 print "Loading Wordlist..."
@@ -20,3 +21,8 @@ for line in file:
     docs.append(proc.process(line))
 print "Indexing Documents..."
 #TODO INDEX DOCUMENTS
+idxr = indexer.Indexer()
+for doc in docs:
+    idxr.index_document(doc)
+end = datetime.datetime.now()
+print duration, str(end-start)
