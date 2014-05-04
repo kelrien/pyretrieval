@@ -25,4 +25,4 @@ idxr = indexer.Indexer()
 for doc in docs:
     idxr.index_document(doc)
 end = datetime.datetime.now()
-print duration, str(end-start)
+print "Duration", str(end-start)
