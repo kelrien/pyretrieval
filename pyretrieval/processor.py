@@ -21,11 +21,11 @@ class Processor(object):
                         
     #stopwords will be ignored when tokenized
     def load_stopwords(self,file_path):
-        file = open(file_path)
-        for line in file:
-            line = line.decode('utf-8')
-            if not line.startswith('#'):
-                self.stopwords.append(line.strip('\n').strip('\r').lower())
+        with open(file_path) as file:
+            for line in file:
+                line = line.decode('utf-8')
+                if not line.startswith('#'):
+                    self.stopwords.append(line.strip('\n').strip('\r').lower())
     
     def load_lemmas(self,file_path):
         # load lemmas from file
