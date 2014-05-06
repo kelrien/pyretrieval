@@ -7,12 +7,12 @@ start = datetime.datetime.now()
 print "Initializing Document Processor"
 proc = processor.Processor()
 print "Loading Wordlist..."
-proc.load_lemmas('pyretrieval/wordlist_german')
+proc.load_lemmas('german_example_files/wordlist_german')
 print "Loading Stopwords..."
-proc.load_stopwords('pyretrieval/stopwords_german')
+proc.load_stopwords('german_example_files/stopwords_german')
 print "Processing Documents"
 docs = []
-file = open('pyretrieval/german_news_example')
+file = open('german_example_files/german_news_example')
 i = 0
 for line in file:
     i += 1
