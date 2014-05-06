@@ -23,6 +23,6 @@ print "Indexing Documents..."
 #TODO INDEX DOCUMENTS
 idxr = indexer.Indexer()
 for doc in docs:
-    idxr.index_document(doc)
+    idxr.index(doc)
 end = datetime.datetime.now()
 print "Duration", str(end-start)

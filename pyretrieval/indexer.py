@@ -6,7 +6,7 @@ class Indexer(object):
         self.inv_index = dict()
 
     #Add a document to the inverted index
-    def index_document(self, document):
+    def index(self, document):
         for word in document.vector:
             if self.inv_index.has_key(word):
                 self.inv_index[word].append(document)
