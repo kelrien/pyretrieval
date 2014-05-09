@@ -25,4 +25,5 @@ idxr = indexer.Indexer()
 for doc in docs:
     idxr.index(doc)
 end = datetime.datetime.now()
-print "Duration", str(end-start)
+print "Done!"
+print "Total Duration:", str(end-start)
