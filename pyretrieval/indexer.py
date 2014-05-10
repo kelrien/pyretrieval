@@ -17,7 +17,7 @@ class Indexer(object):
                 self.inv_index[word] = [document]
 
     #Query the indexer for an ordered (limited) list of similar documents
-    def search(query, limit = -1):
+    def search(query_document, limit = -1):
         pass
 
     def calculate_idf(self):
