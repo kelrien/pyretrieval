@@ -37,7 +37,7 @@ print "Finished after:",str(datetime.datetime.now()-temp_time)
 #CALCULATE INVERSE DOCUMENT FREQUENCY
 temp_time = datetime.datetime.now()
 print "Calculating inverse document frequency"
-idxr.calculate_idf()
+idxr.calculate_idfs()
 print "Finished after:", str(datetime.datetime.now()-temp_time)
 
 print "Total Duration:", str(datetime.datetime.now()-start)
