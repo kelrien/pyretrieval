@@ -35,13 +35,10 @@ class Indexer(object):
         if len(words) >= len(docx.vector.keys()) + len(docy.vector.keys()):
             return 1
         numerator = 0.0
-        denominator = docx.magnitude() * docy.magnitude()
-        print denominator
         for word in words:
-            idf = self.idfs.get(word,1) 
-            idf = idf * idf
-            numerator += docx.vector.get(word, 0)*docy.vector.get(word,0)*idf
-        result = numerator / denominator 
+            numerator += docx.vector.get(word, 0)*docy.vector.get(word,0)
+        denominator = docx.magnitude() * docy.magnitude()
+        result = numerator / denominator
         return result
          
         
@@ -49,3 +46,6 @@ class Indexer(object):
         for word in self.inv_index.keys():
             idf = math.log((self.doc_count / len(self.inv_index[word])))
             self.idfs[word] = idf
+
+    def set_idfs(self):
+        pass
