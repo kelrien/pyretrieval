@@ -39,5 +39,11 @@ temp_time = datetime.datetime.now()
 print "Calculating inverse document frequency"
 idxr.calculate_idfs()
 print "Finished after:", str(datetime.datetime.now()-temp_time)
-
+print "==================================="
 print "Total Duration:", str(datetime.datetime.now()-start)
+print "IR-SYSTEM READ ENTER QUERY AND PRESS ENTER:"
+input = ""
+while input is not "quit":
+    string = raw_input("Query: ");
+    query = proc.process(string)
+    result = idxr.search(query)
