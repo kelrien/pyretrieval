@@ -1,4 +1,5 @@
 import json
+import math
 
 class Document(object):
 
@@ -17,7 +18,13 @@ class Document(object):
         
     def __iter__(self):
         return self.vector.itervalues()    
-    
+
+    def magnitude(self):
+        temp = 0
+        for value in self.vector.values():
+            temp += value*value
+        return math.sqrt(temp)
+        
     def json(self):
         #transform object including metadata into json
         pass

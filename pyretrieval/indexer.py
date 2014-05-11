@@ -20,9 +20,10 @@ class Indexer(object):
     #Query the indexer for an ordered (limited) list of similar documents
     def search(self, query_document, limit = -1):
         result = dict()
-        documents = set()
+        documents = []
         for word in query_document.vector.keys():
-            documents += set(self.inv_index.get(word,[]))
+            documents += self.inv_index.get(word,[])
+        documents = set(documents)
         for doc in documents:
             result[doc] = self.compare(query_document, doc)
         return result
@@ -34,13 +35,14 @@ class Indexer(object):
         if len(words) >= len(docx.vector.keys()) + len(docy.vector.keys()):
             return 1
         numerator = 0.0
-        demoninator = docx.magnitude() * docy.magnitude()
+        denominator = docx.magnitude() * docy.magnitude()
+        print denominator
         for word in words:
             idf = self.idfs.get(word,1) 
             idf = idf * idf
             numerator += docx.vector.get(word, 0)*docy.vector.get(word,0)*idf
-        #Angle instead of cosine: math.Acos(math.Round(result, 4)) * 180 / Math.PI;
-        return numerator / denominator
+        result = numerator / denominator 
+        return result
          
         
     def calculate_idfs(self):
