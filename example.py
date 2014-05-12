@@ -43,6 +43,6 @@ print "Total Duration:", str(datetime.datetime.now()-start)
 print "IR-SYSTEM READ ENTER QUERY AND PRESS ENTER:"
 input = ""
 while input is not "quit":
-    string = raw_input("Query: ").decode(sys.stdout.encoding).encode("utf-8");
+    string = raw_input("Query: ").decode(sys.stdout.encoding);
     query = proc.process(string)
     result = idxr.search(query)
