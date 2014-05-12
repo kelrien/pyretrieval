@@ -48,4 +48,6 @@ class Indexer(object):
             self.idfs[word] = idf
 
     def set_idfs(self):
-        pass
+        for index in self.inv_index.keys():
+            for doc in self.inv_index[index]:
+                doc.vector[index] = doc.vector[x] * self.idfs.get(ind,1) 
