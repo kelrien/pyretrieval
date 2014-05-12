@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime, sys
-
 from pyretrieval import processor, document, indexer
 
 start = datetime.datetime.now()
@@ -44,6 +43,6 @@ print "Total Duration:", str(datetime.datetime.now()-start)
 print "IR-SYSTEM READ ENTER QUERY AND PRESS ENTER:"
 input = ""
 while input is not "quit":
-    string = raw_input("Query: ");
+    string = raw_input("Query: ").decode(sys.stdout.encoding).encode("utf-8");
     query = proc.process(string)
     result = idxr.search(query)
