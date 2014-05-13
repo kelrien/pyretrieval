@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime, sys
+import datetime, sys, operator
 from pyretrieval import processor, document, indexer
 
 start = datetime.datetime.now()
@@ -45,4 +45,7 @@ input = ""
 while input is not "quit":
     string = raw_input("Query: ").decode(sys.stdout.encoding);
     query = proc.process(string)
-    result = idxr.search(query)
+    result = sorted(idxr.search(query).iteritems(), key=operator.itemgetter(1) ,reverse=True)
+    for res in result:
+	print res[0].metadata["original"]
+    print "==============================================================="
