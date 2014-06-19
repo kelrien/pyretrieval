@@ -30,8 +30,8 @@ with open('german_example_files/german_news_example') as file:
 print "Finished after:", str(datetime.datetime.now()-temp_time)
 # INDEX DOCUMENTS
 print "Indexing Documents..."
-temp_time = datetime.datetime.now()
 idxr = indexer.Indexer()
+temp_time = datetime.datetime.now()
 for doc in docs:
     idxr.index(doc)
 print "Finished after:", str(datetime.datetime.now()-temp_time)

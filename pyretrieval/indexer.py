@@ -13,7 +13,7 @@ class Indexer(object):
     def index(self, document):
         self.doc_count += 1
         for word in document.vector:
-            if word in self.inv_index.keys():
+            if word in self.inv_index:
                 self.inv_index[word].append(document)
             else:
                 self.inv_index[word] = [document]
