@@ -42,12 +42,12 @@ class Indexer(object):
         result = numerator / denominator
         return result
 
-    def calculate_idfs(self):
-        for word in self.inv_index.keys():
-            idf = math.log((self.doc_count / len(self.inv_index[word])))
-            self.idfs[word] = idf
-
     def set_idfs(self):
         for index in self.inv_index.keys():
             for doc in self.inv_index[index]:
                 doc.vector[index] = doc.vector[x] * self.idfs.get(ind, 1)
+
+    def calc_idfs(self):
+        for word, documents in self.inv_index.iteritems():
+            idf = math.log((self.doc_count / len(documents)))
+            self.idfs[word] = idf

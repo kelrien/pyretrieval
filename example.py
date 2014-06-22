@@ -38,16 +38,19 @@ print "Finished after:", str(datetime.datetime.now()-temp_time)
 # CALCULATE INVERSE DOCUMENT FREQUENCY
 temp_time = datetime.datetime.now()
 print "Calculating inverse document frequency"
-idxr.calculate_idfs()
+idxr.calc_idfs()
 print "Finished after:", str(datetime.datetime.now()-temp_time)
 print "==================================="
 print "Total Duration:", str(datetime.datetime.now()-start)
 print "IR-SYSTEM READ ENTER QUERY AND PRESS ENTER:"
-input = ""
-while input is not "quit":
+string = ""
+while string != "quit":
+    print "==============================================================="
+    print "==============================================================="
     string = raw_input("Query: ").decode(sys.stdout.encoding)
     query = proc.process(string)
-    result = sorted(idxr.search(query).iteritems(), key=operator.itemgetter(1), reverse=True)
+    result = sorted(idxr.search(query).iteritems(), key=operator.itemgetter(1),
+                    reverse=True)
     for res in result:
         print res[0].metadata["original"]
         print "==============================================================="
