@@ -43,7 +43,7 @@ class Indexer(object):
         result = numerator / denominator
         return result
 
-    # Set current idf values in documents
+    # Set current (calculated) idf values in documents
     def set_idfs(self):
         for index in self.inv_index.keys():
             for doc in self.inv_index[index]:
