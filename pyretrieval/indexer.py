@@ -29,6 +29,7 @@ class Indexer(object):
             result[doc] = self.compare(query_document, doc)
         return result
 
+    # Compare two documents and return the similarity by angle
     def compare(self, docx, docy):
         # merge document vector keys without duplicates
         words = set(docx.vector.keys() + docy.vector.keys())
@@ -42,11 +43,13 @@ class Indexer(object):
         result = numerator / denominator
         return result
 
+    # Set current idf values in documents
     def set_idfs(self):
         for index in self.inv_index.keys():
             for doc in self.inv_index[index]:
                 doc.vector[index] = doc.vector[x] * self.idfs.get(ind, 1)
 
+    # Calculate inverse document frequency for every word in the inverted index
     def calc_idfs(self):
         for word, documents in self.inv_index.iteritems():
             idf = math.log((self.doc_count / len(documents)))
