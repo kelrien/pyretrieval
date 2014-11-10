@@ -7,7 +7,8 @@ class Processor(object):
 
     def __init__(self, filter_characters='a-zA-Z0-9 ', replace_characters={u'\xe4': 'ae', u'\xf6': 'oe', u'\xfc': 'ue', u'\xdf': 'ss'}, stopwords=[], lemmas=dict()):
         self.stopwords = stopwords
-        # replace characters is a dict of chars where the key marks the character to be replaced with the connected value
+        # replace characters is a dict of chars where the key
+        # marks the character to be replaced with the connected value
         self.replace_characters = replace_characters
         # filter_characters is a regex that triggers on allowed characters
         self.filter_characters = filter_characters
@@ -65,6 +66,7 @@ class Processor(object):
 
     # stem -> index
     def stem(word):
+        #TODO implement Stemming algorithm
         return word
 
     # index -> done

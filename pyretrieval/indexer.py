@@ -37,7 +37,7 @@ class Indexer(object):
             return 1
         numerator = 0.0
         for word in words:
-            numerator += docx.vector.get(word, 0)*docy.vector.get(word, 0)
+            numerator += docx.vector.get(word, 0) * docy.vector.get(word, 0)
         denominator = docx.magnitude()*docy.magnitude()
         result = numerator / denominator
         return result
