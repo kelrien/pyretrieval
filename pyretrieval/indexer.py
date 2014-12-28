@@ -36,11 +36,14 @@ class Indexer(object):
         # if document vectors share no dimension(word) they cannot be similar
         if len(words) >= len(docx.vector.keys()) + len(docy.vector.keys()):
             return 1
+        print "Comparing {0} with {1}".format(docx.to_json(), docy.to_json())
         numerator = 0.0
         for word in words:
             numerator += docx.vector.get(word, 0) * docy.vector.get(word, 0)
         denominator = docx.magnitude()*docy.magnitude()
+        print "{0} / {1}".format(numerator, denominator)
         result = numerator / denominator
+        result = math.acos(result)
         return result
 
     # Set current (calculated) idf values in documents

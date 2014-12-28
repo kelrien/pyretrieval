@@ -49,7 +49,7 @@ print "==================================="
 print "Total Duration:", str(datetime.datetime.now()-start)
 
 # IR SYSTEM READY
-print "IR-SYSTEM READ ENTER QUERY AND PRESS ENTER:"
+print "IR-SYSTEM READY ENTER QUERY AND PRESS ENTER:"
 string = ""
 while string != "quit":
     print "==============================================================="

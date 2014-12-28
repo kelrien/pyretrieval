@@ -25,5 +25,6 @@ class Document(object):
         return math.sqrt(temp)
 
     # get JSON representation of the document
-    def json(self):
-        return str(self.__dict__)
+    def to_json(self):
+        result = str(self.vector)
+        return result
