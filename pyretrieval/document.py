@@ -7,6 +7,7 @@ class Document(object):
     def __init__(self):
         self.vector = dict()
         self.metadata = dict()
+        self.metadata["original"] = ""
 
     def __getitem__(self, key):
         return self.vector.get(key, 0)
@@ -17,11 +18,14 @@ class Document(object):
     def __iter__(self):
         return self.vector.itervalues()
 
-    # calculate magnitude of document-vector
+    def __str__(self):
+        return self.metadata["original"]
+
+    # calculate magnitude of the document-vector
     def magnitude(self):
         temp = 0
         for value in self.vector.values():
-            temp += value*value
+            temp += value * value
         return math.sqrt(temp)
 
     # get JSON representation of the document

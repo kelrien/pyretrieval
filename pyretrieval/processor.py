@@ -5,7 +5,11 @@ import re
 
 class Processor(object):
 
-    def __init__(self, filter_characters='a-zA-Z0-9 ', replace_characters={u'\xe4': 'ae', u'\xf6': 'oe', u'\xfc': 'ue', u'\xdf': 'ss'}, stopwords=[], lemmas=dict()):
+    def __init__(self, filter_characters='a-zA-Z0-9 ',
+                 replace_characters={
+                     u'\xe4': 'ae', u'\xf6': 'oe',
+                     u'\xfc': 'ue', u'\xdf': 'ss'},
+                 stopwords=[], lemmas=dict()):
         self.stopwords = stopwords
         # replace characters is a dict of chars where the key
         # marks the character to be replaced with the connected value
@@ -30,7 +34,8 @@ class Processor(object):
                     if do_clean:
                         self.stopwords.append(self.clean(line))
                     else:
-                        self.stopwords.append(line.strip('\r').strip('\n').lower())
+                        self.stopwords.append(
+                            line.strip('\r').strip('\n').lower())
 
     # load lemmas from file
     def load_lemmas(self, file_path, do_clean=False):
@@ -66,11 +71,13 @@ class Processor(object):
 
     # stem -> index
     def stem(word):
-        #TODO implement Stemming algorithm
+        # TODO implement or import Stemming algorithm
         return word
 
     # index -> done
     def process(self, string, lemmatize=True):
+        ''' instead of a flag use the stemmer 
+        whenever the lemmas dict is empty? '''
         result = document.Document()
         result.metadata["original"] = string
         tokens = self.tokenize(string)
