@@ -41,6 +41,8 @@ class Indexer(object):
             numerator += docx.vector.get(word, 0) * docy.vector.get(word, 0)   
         denominator = docx.magnitude()*docy.magnitude()
         result = numerator / denominator
+        # remove problable computational errors
+        result = min(1,max(result,-1))
         # get the angle in radians
         result = math.acos(result)
         # convert radians to degrees
