@@ -35,13 +35,11 @@ class Indexer(object):
         words = set(docx.vector.keys() + docy.vector.keys())
         # if document vectors share no dimension(word) they cannot be similar
         if len(words) >= len(docx.vector.keys()) + len(docy.vector.keys()):
-            return 1
-        print "Comparing {0} to {1}".format(docx.to_json(), docy.to_json())
+            return 90
         numerator = 0.0
         for word in words:
-            numerator += docx.vector.get(word, 0) * docy.vector.get(word, 0)
+            numerator += docx.vector.get(word, 0) * docy.vector.get(word, 0)   
         denominator = docx.magnitude()*docy.magnitude()
-        print "{0} / {1}".format(numerator, denominator)
         result = numerator / denominator
         # get the angle in radians
         result = math.acos(result)

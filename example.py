@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import sys
+import os
 import operator
 import optparse
 from pyretrieval import processor, document, indexer
@@ -37,7 +38,8 @@ if __name__ == "__main__":
         for line in file:
             i += 1
             sys.stdout.write(str(i)+'\r')
-            docs.append(proc.process(line.decode("utf-8")))
+            doc = proc.process(line.decode("utf8"))
+            docs.append(doc)
     print "Finished after:", str(datetime.datetime.now()-temp_time)
 
     # INDEX DOCUMENTS
@@ -49,12 +51,12 @@ if __name__ == "__main__":
     print "Finished after:", str(datetime.datetime.now()-temp_time)
 
     # CALCULATE INVERSE DOCUMENT FREQUENCY
-    temp_time = datetime.datetime.now()
-    print "Calculating inverse document frequency"
-    idxr.calc_idfs()
-    print "Finished after:", str(datetime.datetime.now()-temp_time)
-    print "==================================="
-    print "Total Duration:", str(datetime.datetime.now()-start)
+    # temp_time = datetime.datetime.now()
+    # print "Calculating inverse document frequency"
+    # idxr.calc_idfs()
+    # print "Finished after:", str(datetime.datetime.now()-temp_time)
+    # print "==================================="
+    # print "Total Duration:", str(datetime.datetime.now()-start)
 
     # IR SYSTEM READY
     print "IR-SYSTEM READY ENTER QUERY AND PRESS ENTER:"
