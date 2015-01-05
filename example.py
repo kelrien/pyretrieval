@@ -2,7 +2,6 @@
 import datetime
 import sys
 import os
-import operator
 import optparse
 from pyretrieval import processor, document, indexer
 
@@ -21,13 +20,13 @@ if __name__ == "__main__":
     print "Loading Stopwords..."
     temp_time = datetime.datetime.now()
     proc.load_stopwords(options.stopwords, True)
-    print "Finished after:", str(datetime.datetime.now()-temp_time)
+    print "Finished after:", str(datetime.datetime.now() - temp_time)
 
     # LOAD LEMMAS
     print "Loading Lemmas..."
     temp_time = datetime.datetime.now()
     proc.load_lemmas(options.lemmas, True)
-    print "Finished after:", str(datetime.datetime.now()-temp_time)
+    print "Finished after:", str(datetime.datetime.now() - temp_time)
 
     # PROCESS DOCUMENTS
     print "Processing Documents"
@@ -37,10 +36,10 @@ if __name__ == "__main__":
         i = 0
         for line in file:
             i += 1
-            sys.stdout.write(str(i)+'\r')
+            sys.stdout.write(str(i) + '\r')
             doc = proc.process(line.decode("utf8"))
             docs.append(doc)
-    print "Finished after:", str(datetime.datetime.now()-temp_time)
+    print "Finished after:", str(datetime.datetime.now() - temp_time)
 
     # INDEX DOCUMENTS
     print "Indexing Documents..."
@@ -48,7 +47,7 @@ if __name__ == "__main__":
     temp_time = datetime.datetime.now()
     for doc in docs:
         idxr.index(doc)
-    print "Finished after:", str(datetime.datetime.now()-temp_time)
+    print "Finished after:", str(datetime.datetime.now() - temp_time)
 
     # CALCULATE INVERSE DOCUMENT FREQUENCY
     # temp_time = datetime.datetime.now()
@@ -66,8 +65,9 @@ if __name__ == "__main__":
         print "==============================================================="
         string = raw_input("Query: ").decode(sys.stdout.encoding)
         query = proc.process(string)
-        result = sorted(idxr.search(query).iteritems(), key=operator.itemgetter(1),
-                        reverse=False)
-        for res in result:
-            print str(res[1]) + " " + res[0].metadata["original"]
-            print "---------------------------------------------------------------"
+        result = idxr.search(query, 5)
+        print query.to_json()
+        for kv in result:
+            print kv[1], kv[0].to_json()
+            print kv[0].metadata["original"]
+            print ""

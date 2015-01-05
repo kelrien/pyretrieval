@@ -57,15 +57,20 @@ class Processor(object):
         result = string.strip('\n').strip('\r').lower()
         for char in self.replace_characters.keys():
             result = result.replace(char, self.replace_characters[char])
+
         return result
 
     # tokenize -> stem
     def tokenize(self, string):
         temp = string.lower()
-        # replace characters
+
+        # clean string
         temp = self.clean(temp)
+
+        # FIND A SMART WAY TO INCORPORATE THIS IN THE CLEAN FUNCTION
         # remove unwanted characters
-        temp = re.sub(r'[^.{0}]'.format(self.filter_characters), ' ', temp)
+        temp = re.sub(r'[^{0}]'.format(self.filter_characters), ' ', temp)
+        
         result = temp.split()
         return result
 

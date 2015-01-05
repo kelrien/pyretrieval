@@ -19,7 +19,7 @@ class Document(object):
         return self.vector.itervalues()
 
     def __str__(self):
-        return self.metadata["original"]
+        return self.metadata["original"].encode("utf8")
 
     # calculate magnitude of the document-vector
     def magnitude(self):
@@ -30,5 +30,5 @@ class Document(object):
 
     # get JSON representation of the document
     def to_json(self):
-        result = str(self.vector)
+        result = json.dumps(self.vector)
         return result
