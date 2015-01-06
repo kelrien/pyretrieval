@@ -58,22 +58,21 @@ class Indexer(object):
             numerator += docx.vector.get(word, 0) * docy.vector.get(word, 0)
 
         denominator = docx.magnitude() * docy.magnitude()
-
-        result = numerator / denominator
+        cos = numerator / denominator
 
         # remove problable computational errors
-        result = min(1, max(result, -1))
+        result = min(1, max(cos, -1))
 
         # get the angle in radians
-        result = math.acos(result)
+        rad_angle = math.acos(result)
 
         # convert radians to degrees
-        result = math.degrees(result)
+        result = math.degrees(rad_angle)
         return result
 
     # Set current (calculated) idf values in documents
     def set_idfs(self):
-        for index in self.inv_index.keys():
+        for index in set(self.inv_index.keys()):
             for doc in self.inv_index[index]:
                 doc.vector[index] = doc.vector[x] * self.idfs.get(ind, 1)
 

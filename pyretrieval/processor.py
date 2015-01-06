@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import document
 import re
+from nltk.stem.snowball import SnowballStemmer
 
 
 class Processor(object):
@@ -9,7 +10,7 @@ class Processor(object):
                  replace_characters={
                      u'\xe4': 'ae', u'\xf6': 'oe',
                      u'\xfc': 'ue', u'\xdf': 'ss'},
-                 stopwords=[], lemmas=dict()):
+                 stopwords=[], lemmas=dict(), language="german"):
         self.stopwords = stopwords
         # replace characters is a dict of chars where the key
         # marks the character to be replaced with the connected value
@@ -17,6 +18,8 @@ class Processor(object):
         # filter_characters is a regex that triggers on allowed characters
         self.filter_characters = filter_characters
         self.lemmas = lemmas
+        if language in SnowballStemmer.languages:
+            self.stemmer = SnowballStemmer(language)
 
     # lemmatize -> index
     def lemmatize(self, word):
@@ -70,14 +73,14 @@ class Processor(object):
         # FIND A SMART WAY TO INCORPORATE THIS IN THE CLEAN FUNCTION
         # remove unwanted characters
         temp = re.sub(r'[^{0}]'.format(self.filter_characters), ' ', temp)
-        
+
         result = temp.split()
         return result
 
     # stem -> index
-    def stem(word):
-        # TODO implement or import Stemming algorithm
-        return word
+    def stem(self, word):
+        result = self.stemmer.stem(word)
+        return result
 
     # index -> done
     def process(self, string, lemmatize=True):
@@ -90,7 +93,7 @@ class Processor(object):
             if lemmatize:
                 token = self.lemmatize(token)
             else:
-                token = stem(token)
+                token = self.stem(token)
             if token not in self.stopwords:
                 if token in result.vector:
                     result.vector[token] += 1

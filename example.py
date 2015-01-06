@@ -16,17 +16,21 @@ if __name__ == "__main__":
     print "Initializing Document Processor"
     proc = processor.Processor()
 
-    # LOAD STOPWORDS
-    print "Loading Stopwords..."
-    temp_time = datetime.datetime.now()
-    proc.load_stopwords(options.stopwords, True)
-    print "Finished after:", str(datetime.datetime.now() - temp_time)
+    if options.stopwords:
+        # LOAD STOPWORDS
+        print "Loading Stopwords..."
+        temp_time = datetime.datetime.now()
+        proc.load_stopwords(options.stopwords, True)
+        print "Finished after:", str(datetime.datetime.now() - temp_time)
 
-    # LOAD LEMMAS
-    print "Loading Lemmas..."
-    temp_time = datetime.datetime.now()
-    proc.load_lemmas(options.lemmas, True)
-    print "Finished after:", str(datetime.datetime.now() - temp_time)
+    lemmatize = False
+    if options.lemmas:
+        # LOAD LEMMAS
+        print "Loading Lemmas..."
+        temp_time = datetime.datetime.now()
+        proc.load_lemmas(options.lemmas, True)
+        lemmatize = True
+        print "Finished after:", str(datetime.datetime.now() - temp_time)
 
     # PROCESS DOCUMENTS
     print "Processing Documents"
@@ -37,7 +41,7 @@ if __name__ == "__main__":
         for line in file:
             i += 1
             sys.stdout.write(str(i) + '\r')
-            doc = proc.process(line.decode("utf8"))
+            doc = proc.process(line.decode("utf8"), lemmatize)
             docs.append(doc)
     print "Finished after:", str(datetime.datetime.now() - temp_time)
 
@@ -64,9 +68,10 @@ if __name__ == "__main__":
         print "==============================================================="
         print "==============================================================="
         string = raw_input("Query: ").decode(sys.stdout.encoding)
-        query = proc.process(string)
+        query = proc.process(string, lemmatize)
         result = idxr.search(query, 5)
-        print query.to_json()
+        print "document vector of query: {0}".format(query.to_json())
+        print ""
         for kv in result:
             print kv[1], kv[0].to_json()
             print kv[0].metadata["original"]
